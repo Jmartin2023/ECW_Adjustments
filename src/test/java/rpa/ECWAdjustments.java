@@ -154,6 +154,7 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 
 	
 		adjObj.waitFunc(adjObj.claimField);
+		Thread.Sleep(2000);
 		adjObj.claimField.clear();
 		int claimNumber = 0;
 		try {
