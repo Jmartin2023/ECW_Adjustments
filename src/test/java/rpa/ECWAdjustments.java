@@ -226,7 +226,7 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 			System.out.println(formatter.format(parser.parse(serviceDate)) +" is date");
 		 date=	formatter.format(parser.parse(serviceDate));
 			for(int j=0; j < cptArray.length; j++) {
-				  cpt = cptArray[j].trim().replace("0.", "");
+				  cpt = cptArray[j].trim().replace(".0", "");
 				System.out.println(cpt);
 				
 				String writtenBalance = adjObj.getbalanceFromApp(date, cpt).getText();
