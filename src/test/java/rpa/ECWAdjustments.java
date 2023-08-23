@@ -34,22 +34,25 @@ import objects.ExcelOperations;
 import objects.SeleniumUtils;
 import objects.Utility;
 import utilities.ExcelReader;
+import rpa.Adjustment_Objects;
+
+
 
 public class ECWAdjustments {
-	Logger logger = LogManager.getLogger(ECW_Patient_Creation.class);
+	Logger logger = LogManager.getLogger(ECWAdjustments.class);
 
-	String projDirPath, status, claimNo, patientName ,DOB ,serviceDate ,Balance, CPT;
+	String projDirPath, status, claimNo, patientName ,DOB ,serviceDate ,Balance, CPT, date;
 	String[] cptArray;
 	SimpleDateFormat parser = new SimpleDateFormat("MM/dd/yy");
 	// output format: yyyy-MM-dd
 	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 	//System.out.println(formatter.format(parser.parse(data.get("DOB"))));
-	public static ExcelReader excel; public static String sheetName = "Sheet1";
+	public static ExcelReader excel; public static String sheetName = "Sheet1",cpt;
 	int rowNum = 1;
 
 	WebDriver driver;
 	
-	JavascriptExecutor js;
+	//JavascriptExecutor js;
 	SeleniumUtils sel;
 	Utility utility;
 	
@@ -64,7 +67,7 @@ public void preRec() throws InterruptedException, SAXException, IOException, Par
 
 	driver = sel.getDriver();
 
-	js = (JavascriptExecutor) driver;
+	//js = (JavascriptExecutor) driver;
 	adjObj= new Adjustment_Objects(driver);
 	utility = new Utility();
 	
@@ -140,7 +143,7 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 	 cptArray= CPT.split(", ");
 		System.out.println("Balance is "+ Balance);
 	 for(int i=0; i < cptArray.length; i++) {
-			String cpt = cptArray[i];
+			 cpt = cptArray[i];
 			System.out.println(cptArray[i]);
 			}
 	
@@ -213,6 +216,7 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 			logger.info("Clicked on Click Button");
 			
 			adjObj.waitFunc(adjObj.postCPTBtn);
+			Thread.sleep(1000);
 			adjObj.postCPTBtn.click();
 			logger.info("Clicked on post CPT Btn Button");
 			
@@ -220,10 +224,10 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 			
 			adjObj.waitFunc(adjObj.ClaimVerif);
 			System.out.println(formatter.format(parser.parse(serviceDate)) +" is date");
-		String date=	formatter.format(parser.parse(serviceDate));
+		 date=	formatter.format(parser.parse(serviceDate));
 			for(int j=0; j < cptArray.length; j++) {
-				 String cpt = cptArray[j];
-				System.out.println(cptArray[j]);
+				  cpt = cptArray[j].trim().replace("0.", "");
+				System.out.println(cpt);
 				
 				String writtenBalance = adjObj.getbalanceFromApp(date, cpt).getText();
 				System.out.println("Balance from App is: "+ writtenBalance);
