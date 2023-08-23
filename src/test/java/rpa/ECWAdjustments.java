@@ -173,8 +173,7 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 		logger.info("Clicked on LookUp Button");
 		
 		adjObj.waitFuncInvisibility(adjObj.loadingBtn);
-		adjObj.waitFunc(adjObj.balanceField);
-		
+		Thread.sleep(3000);	
 		adjObj.waitFunc(adjObj.balanceField);
 		Thread.sleep(3000);
 		System.out.println(adjObj.balanceField.getText()+" is balance in app");
