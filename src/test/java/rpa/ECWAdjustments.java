@@ -140,7 +140,10 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 	 serviceDate = data.get("Service Date");
 	 Balance = data.get("Balance");
 	 CPT = data.get("CPT Code");
-	 cptArray= CPT.split(", ");
+	 try{ cptArray= CPT.split(", ");
+}catch(Exception e){
+cptArray= CPT.split(" ; ")
+}
 		System.out.println("Balance is "+ Balance);
 	 for(int i=0; i < cptArray.length; i++) {
 			 cpt = cptArray[i];
