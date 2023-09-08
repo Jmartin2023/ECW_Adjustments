@@ -253,7 +253,7 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 			}catch(Exception e) {
 				
 			}
-			
+			Thread.sleep(2000);
 			adjObj.OkBtn3.click();
 			System.out.println("Another OK Clicked");
 			try {
