@@ -110,6 +110,13 @@ public class Adjustment_Objects {
 	@FindBy(xpath = "//button[contains(@id,'claimScreenOkBtn')]")
 	public WebElement OkBtn4;
 	
+	@FindBy(xpath = "//button[@id='claimAdjustmentsBtn20' and text()='Yes']")
+	public WebElement yesBtn;
+	
+	@FindBy(xpath = "//button[@id='claimAdjustmentsBtn23' and text()='Yes']")
+	public WebElement yesBtn2;
+	
+	
 	
 	
 	
