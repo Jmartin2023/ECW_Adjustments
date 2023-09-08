@@ -140,11 +140,13 @@ public void AdjustmentCase(Hashtable<String,String> data) throws InterruptedExce
 	 serviceDate = data.get("Service Date");
 	 Balance = data.get("Balance");
 	 CPT = data.get("CPT Code");
-	 try{ cptArray= CPT.split(", ");
-}catch(Exception e){
-cptArray= CPT.split(" ; ")
-}
-		System.out.println("Balance is "+ Balance);
+	
+	 cptArray= CPT.split(", ");
+	 logger.info("Comma separated");
+	 cptArray= CPT.split(" ; ");
+	 logger.info(" ; separated");
+	 
+	 System.out.println("Balance is "+ Balance);
 	 for(int i=0; i < cptArray.length; i++) {
 			 cpt = cptArray[i];
 			System.out.println(cptArray[i]);
@@ -176,7 +178,7 @@ cptArray= CPT.split(" ; ")
 		logger.info("Clicked on LookUp Button");
 		
 		adjObj.waitFuncInvisibility(adjObj.loadingBtn);
-		Thread.sleep(3000);	
+		Thread.sleep(3000);		
 		adjObj.waitFunc(adjObj.balanceField);
 		Thread.sleep(3000);
 		System.out.println(adjObj.balanceField.getText()+" is balance in app");
@@ -242,11 +244,25 @@ cptArray= CPT.split(" ; ")
 			}
 			adjObj.OkBtn2.click();
 			System.out.println("OK Clicked");
-			adjObj.waitFunc(adjObj.OkBtn3);
-			Thread.sleep(1500);
+			
+			try {
+				adjObj.waitFunc(adjObj.yesBtn);
+				Thread.sleep(1000);
+				adjObj.yesBtn.click();
+				logger.info("Yes button clicked");
+			}catch(Exception e) {
+				
+			}
+			
 			adjObj.OkBtn3.click();
 			System.out.println("Another OK Clicked");
-			
+			try {
+				adjObj.waitFunc(adjObj.yesBtn2);
+				Thread.sleep(1000);
+				adjObj.yesBtn2.click();
+				logger.info("Another Yes button clicked");
+			}catch(Exception e) {
+			}
 			
 			Thread.sleep(2000);
 			System.out.println(adjObj.adjustmentBalance.getText() + "----"+ Balance);
